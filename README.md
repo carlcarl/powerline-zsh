@@ -28,11 +28,11 @@ A [Powerline](https://github.com/Lokaltog/vim-powerline) like prompt for Zsh:
 
 * Create a symlink to the python script in your home:
 
-        ln -s <path/to/powerline-bash.py> ~/powerline-zsh.py
+        ln -s <path/to/powerline-zsh.py> ~/powerline-zsh.py
 
-  If you don't want the symlink, just modify the path in the .bashrc command below
+  If you don't want the symlink, just modify the path in the .zshrc command below
 
-* Now add the following to your .bashrc:
+* Now add the following to your .zshrc:
 		
 		function _update_ps1()
 		{
