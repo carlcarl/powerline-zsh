@@ -5,8 +5,8 @@ Powerline style prompt for Zsh
 
 A [Powerline](https://github.com/Lokaltog/vim-powerline) like prompt for Zsh:
 
-![Powerline-Zsh Screenshot](http://i.minus.com/iPdtnT6l3CnQ4.png)
-![Powerline-Zsh Screenshot2](http://i.minus.com/i6QuadWZWVI9V.png)
+![Powerline-Zsh Screenshot](http://i.minus.com/ibwmGKYty2C5ua.png)
+![Powerline-Zsh Screenshot2](http://i.minus.com/ibf0sE76zXU4dO.png)
 
 *  Shows some important details about the git branch:
     *  Displays the current git branch which changes background color when the branch is dirty
