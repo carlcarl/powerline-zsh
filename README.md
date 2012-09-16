@@ -37,7 +37,7 @@ A [Powerline](https://github.com/Lokaltog/vim-powerline) like prompt for Zsh:
 		
 		function _update_ps1()
 		{
-			export PS1="$(~/powerline-zsh.py $?)"
+			export PROMPT="$(~/powerline-zsh.py $?)"
 		}
 
 		precmd(){
