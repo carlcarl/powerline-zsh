@@ -10,8 +10,7 @@ class Powerline:
     separator = '⮀'
     separator_thin='⮁'
     LSQESCRSQ = '\\[\\e%s\\]'
-    # reset = LSQESCRSQ % '[0m'
-    reset = '$reset_color'
+    reset = ' %f%k'
 
     def __init__(self):
         self.segments = []
