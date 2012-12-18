@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
 import os
@@ -8,7 +8,7 @@ import re
 import argparse
 
 def warn(msg):
-    print('[powerline-zsh] ', msg)
+    print '[powerline-zsh] ', msg
 
 class Color:
     # The following link is a pretty good resources for color values:
@@ -39,12 +39,12 @@ class Color:
 class Powerline:
     symbols = {
         'compatible': {
-            'separator': '\u25B6',
-            'separator_thin': '\u276F'
+            'separator': u'\u25B6',
+            'separator_thin': u'\u276F'
         },
         'patched': {
-            'separator': '\u2B80',
-            'separator_thin': '\u2B81'
+            'separator': u'\u2B80',
+            'separator_thin': u'\u2B81'
         },
         'default': {
             'separator': '⮀',
