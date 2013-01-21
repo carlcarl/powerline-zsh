@@ -221,7 +221,7 @@ def add_svn_segment(powerline, cwd):
         output = p2.communicate()[0].strip()
         if len(output) > 0 and int(output) > 0:
             changes = output.strip()
-            powerline.append(Segment(' %s ' % changes, Color.SVN_CHANGES_FG, Color.SVN_CHANGES_BG))
+            powerline.append(Segment(powerline, ' %s ' % changes, Color.SVN_CHANGES_FG, Color.SVN_CHANGES_BG))
     except OSError:
         return False
     except subprocess.CalledProcessError:
