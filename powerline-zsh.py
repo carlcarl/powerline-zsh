@@ -256,7 +256,7 @@ def add_virtual_env_segment(powerline, cwd):
     env_name = os.path.basename(env)
     bg = Color.VIRTUAL_ENV_BG
     fg = Color.VIRTUAL_ENV_FG
-    powerline.append(Segment(' %s ' % env_name, fg, bg))
+    powerline.append(Segment(powerline, ' %s ' % env_name, fg, bg))
     return True
 
 
