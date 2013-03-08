@@ -168,7 +168,7 @@ def get_git_status():
     has_untracked_files = False
     detached_head = False
     origin_position = ""
-    current_branch = ""
+    current_branch = ''
     output = subprocess.Popen(['git', 'status', '-unormal'], stdout=subprocess.PIPE).communicate()[0]
     for line in output.split('\n'):
         origin_status = re.findall("Your branch is (ahead|behind).*?(\d+) comm", line)
@@ -192,14 +192,22 @@ def get_git_status():
 
 def add_git_segment(powerline, cwd):
     #cmd = "git branch 2> /dev/null | grep -e '\\*'"
+    p1 = subprocess.Popen(['git', 'branch'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    p2 = subprocess.Popen(['grep', '-e', '\\*'], stdin=p1.stdout, stdout=subprocess.PIPE)
+    output = p2.communicate()[0].strip()
+    if len(output) == 0:
+        return False
 
     has_pending_commits, has_untracked_files, origin_position, detached_head, current_branch = get_git_status()
+
+    if 0 == len(current_branch):
+      return False
 
     if current_branch:
       branch = current_branch
     elif detached_head:
-      branch = subprocess.Popen(['git', 'describe', '--all', '--contains', '--abbrev=4', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-      branch = '((' + branch.communicate()[0].strip() + '))'
+       branch = subprocess.Popen(['git', 'describe', '--all', '--contains', '--abbrev=4', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+       branch = '((' + branch.communicate()[0].strip() + '))'
     else:
       return False
 
