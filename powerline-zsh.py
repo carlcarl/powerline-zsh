@@ -200,7 +200,7 @@ def add_git_segment(powerline, cwd):
 
     has_pending_commits, has_untracked_files, origin_position, detached_head, current_branch = get_git_status()
 
-    if current_branch:
+    if len(current_branch) > 0:
       branch = current_branch
     elif detached_head:
        branch = subprocess.Popen(['git', 'describe', '--all', '--contains', '--abbrev=4', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
