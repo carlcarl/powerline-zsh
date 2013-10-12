@@ -147,7 +147,7 @@ def add_hg_segment(powerline, cwd):
     branch = os.popen('hg branch 2> /dev/null').read().rstrip()
     if len(branch) == 0:
         return False
-    bg = Color.REPO_CLEAN_BG
+    bg = Color.EPO_CLEAN_BG
     fg = Color.REPO_CLEAN_FG
     has_modified_files, has_untracked_files, has_missing_files = get_hg_status()
     if has_modified_files or has_untracked_files or has_missing_files:
@@ -179,7 +179,7 @@ def get_git_status():
             if origin_status[0][0] == 'ahead':
                 origin_position += '⇡'
 
-        if line.find('nothing to commit (working directory clean)') >= 0:
+        if line.find('nothing to commit') >= 0:
             has_pending_commits = False
         if line.find('Untracked files') >= 0:
             has_untracked_files = True
@@ -201,12 +201,12 @@ def add_git_segment(powerline, cwd):
     has_pending_commits, has_untracked_files, origin_position, detached_head, current_branch = get_git_status()
 
     if len(current_branch) > 0:
-      branch = current_branch
+        branch = current_branch
     elif detached_head:
-       branch = subprocess.Popen(['git', 'describe', '--all', '--contains', '--abbrev=4', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-       branch = '((' + branch.communicate()[0].strip() + '))'
+        branch = subprocess.Popen(['git', 'describe', '--all', '--contains', '--abbrev=4', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        branch = '((' + branch.communicate()[0].strip() + '))'
     else:
-      return 'master'
+        return 'master'
 
     branch += origin_position
 
@@ -285,7 +285,7 @@ def add_root_indicator(powerline, error):
     if int(error) != 0:
         fg = Color.CMD_FAILED_FG
         bg = Color.CMD_FAILED_BG
-    powerline.append(Segment(powerline, ' $ ', fg, bg))
+    powerline.append(Segment(powerline, ' ❄', fg, bg))
 
 
 def get_valid_cwd():
