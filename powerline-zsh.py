@@ -176,17 +176,17 @@ def get_git_status():
             origin_position = " %d" % int(origin_status[0][1])
             if origin_status[0][0] == 'behind':
                 origin_position += '⇣'
-            if origin_status[0][0] == 'ahead':
+            elif origin_status[0][0] == 'ahead':
                 origin_position += '⇡'
 
         if line.find('nothing to commit') >= 0:
             has_pending_commits = False
         if line.find('Untracked files') >= 0:
             has_untracked_files = True
-        if line.find('Not currently on any branch') >= 0:
-            detached_head = True
         if line.find('On branch') >= 0:
             current_branch = re.findall('On branch ([^ ]+)', line)[0]
+        elif line.find('Not currently on any branch') >= 0:
+            detached_head = True
     return has_pending_commits, has_untracked_files, origin_position, detached_head, current_branch
 
 
