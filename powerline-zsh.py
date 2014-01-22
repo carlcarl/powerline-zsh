@@ -166,9 +166,7 @@ def add_hg_segment(powerline, cwd):
 def get_git_status():
     has_pending_commits = True
     has_untracked_files = False
-    detached_head = False
     origin_position = ""
-    current_branch = ''
     output = subprocess.Popen(['git', 'status', '-unormal'], stdout=subprocess.PIPE).communicate()[0]
     for line in output.split('\n'):
         origin_status = re.findall("Your branch is (ahead|behind).*?(\d+) comm", line)
@@ -183,33 +181,24 @@ def get_git_status():
             has_pending_commits = False
         if line.find('Untracked files') >= 0:
             has_untracked_files = True
-        if line.find('On branch') >= 0:
-            current_branch = re.findall('On branch ([^ ]+)', line)[0]
-        elif line.find('Not currently on any branch') >= 0:
-            detached_head = True
-    return has_pending_commits, has_untracked_files, origin_position, detached_head, current_branch
+    return has_pending_commits, has_untracked_files, origin_position
 
 
 def add_git_segment(powerline, cwd):
     #cmd = "git branch 2> /dev/null | grep -e '\\*'"
-    p1 = subprocess.Popen(['git', 'branch'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    p2 = subprocess.Popen(['grep', '-e', '\\*'], stdin=p1.stdout, stdout=subprocess.PIPE)
-    output = p2.communicate()[0].strip()
-    if len(output) == 0:
+    p = subprocess.Popen(['git', 'symbolic-ref', '-q', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = p.communicate()
+
+    if 'Not a git repo' in err:
         return False
 
-    has_pending_commits, has_untracked_files, origin_position, detached_head, current_branch = get_git_status()
-
-    if len(current_branch) > 0:
-        branch = current_branch
-    elif detached_head:
-        branch = subprocess.Popen(['git', 'describe', '--all', '--contains', '--abbrev=4', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        branch = '((' + branch.communicate()[0].strip() + '))'
+    if out:
+        branch = out[len('refs/heads/'):].rstrip()
     else:
-        return 'master'
+        branch = '(Detached)'
 
+    has_pending_commits, has_untracked_files, origin_position = get_git_status()
     branch += origin_position
-
     if has_untracked_files:
         branch += ' +'
 
