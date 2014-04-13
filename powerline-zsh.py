@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
+from __future__ import unicode_literals
 import os
 import subprocess
 import sys
@@ -8,8 +10,11 @@ import re
 import argparse
 
 
+encoding = sys.getdefaultencoding()
+
+
 def warn(msg):
-    print '[powerline-zsh] ', msg
+    print('[powerline-zsh] ', msg)
 
 
 class Color:
@@ -41,12 +46,12 @@ class Color:
 class Powerline:
     symbols = {
         'compatible': {
-            'separator': u'\u25B6',
-            'separator_thin': u'\u276F'
+            'separator': '\u25B6',
+            'separator_thin': '\u276F'
         },
         'patched': {
-            'separator': u'\u2B80',
-            'separator_thin': u'\u2B81'
+            'separator': '\u2B80',
+            'separator_thin': '\u2B81'
         },
         'default': {
             'separator': '⮀',
@@ -168,7 +173,7 @@ def get_git_status():
     has_untracked_files = False
     origin_position = ""
     output = subprocess.Popen(['git', 'status', '-unormal'], stdout=subprocess.PIPE).communicate()[0]
-    for line in output.split('\n'):
+    for line in output.decode(encoding).split('\n'):
         origin_status = re.findall("Your branch is (ahead|behind).*?(\d+) comm", line)
         if len(origin_status) > 0:
             origin_position = " %d" % int(origin_status[0][1])
@@ -189,7 +194,7 @@ def add_git_segment(powerline, cwd):
     p = subprocess.Popen(['git', 'symbolic-ref', '-q', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
 
-    if 'Not a git repo' in err:
+    if 'Not a git repo' in err.decode(encoding):
         return False
 
     if out:
@@ -197,6 +202,7 @@ def add_git_segment(powerline, cwd):
     else:
         branch = '(Detached)'
 
+    branch = branch.decode(encoding)
     has_pending_commits, has_untracked_files, origin_position = get_git_status()
     branch += origin_position
     if has_untracked_files:
@@ -309,6 +315,9 @@ if __name__ == '__main__':
     add_cwd_segment(p, cwd, 5, args.cwd_only)
     add_repo_segment(p, cwd)
     add_root_indicator(p, args.prev_error)
-    sys.stdout.write(p.draw())
+    if sys.version_info[0] < 3:
+        sys.stdout.write(p.draw().encode('utf-8'))
+    else:
+        sys.stdout.buffer.write(p.draw().encode('utf-8'))
 
 # vim: set expandtab:
