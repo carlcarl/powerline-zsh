@@ -59,3 +59,21 @@ If you don't want the symlink, just modify the path in the `.zshrc` command belo
       _update_ps1
    }
    ```
+
+# Python version note
+
+Most of the distros use `Python2` as default, however, Some distros like `Archlinux` use `Python3`. The earlier version of `powerline-zsh` is not compatible with `Python3`. With such condition, you have two ways to solve this issue.
+
+1. Use the newest version of `powerline-zsh`. Just download from the `master` branch.
+2. Modify the `.zshrc` content, use `python2` to execute it.
+
+   ```shell
+   function _update_ps1()
+   {
+      export PROMPT="$(python2 ~/powerline-zsh.py $?)"
+   }
+   precmd()
+   {
+      _update_ps1
+   }
+   ```
