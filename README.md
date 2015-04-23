@@ -50,14 +50,14 @@ If you don't want the symlink, just modify the path in the `.zshrc` command belo
 * Now add the following to your `.zshrc`:
 
 ```shell
-    function _update_ps1()
-    {
-        export PROMPT="$(~/powerline-zsh.py $?)"
-    }
-    precmd()
-    {
-        _update_ps1
-    }
+function _update_ps1()
+{
+    export PROMPT="$(~/powerline-zsh.py $?)"
+}
+precmd()
+{
+    _update_ps1
+}
 ```
 
 # Python version note
@@ -68,14 +68,14 @@ Most of the distros use `Python2` as default, however, Some distros like `Archli
 2. Modify the `.zshrc` content, use `python2` to execute it.
 
 ```shell
-    function _update_ps1()
-    {
-        export PROMPT="$(python2 ~/powerline-zsh.py $?)"
-    }
-    precmd()
-    {
-        _update_ps1
-    }
+function _update_ps1()
+{
+    export PROMPT="$(python2 ~/powerline-zsh.py $?)"
+}
+precmd()
+{
+    _update_ps1
+}
 ```
 
 
@@ -85,19 +85,19 @@ You can use `pypy` to speed up your script execution, in your `.zshrc`:
 
 
 ```shell
-    function _update_ps1()
-    {
-        error=$?
-        if [[ -s "/usr/local/bin/pypy" ]]; then
-            export PROMPT="$(pypy ~/powerline-zsh.py $error)"
-        else
-            export PROMPT="$(~/powerline-zsh.py $error)"
-        fi
-    }
-    precmd()
-    {
-        _update_ps1
-    }
+function _update_ps1()
+{
+    error=$?
+    if [[ -s "/usr/local/bin/pypy" ]]; then
+        export PROMPT="$(pypy ~/powerline-zsh.py $error)"
+    else
+        export PROMPT="$(~/powerline-zsh.py $error)"
+    fi
+}
+precmd()
+{
+    _update_ps1
+}
 ```
 
 
@@ -107,13 +107,13 @@ You may not see the icons when using konsole. To solve this problem, you can use
 
 
 ```shell
-    function _update_ps1()
-    {
-        export PROMPT="$(~/powerline-zsh.py -m konsole $?)"
-    }
-    precmd()
-    {
-        _update_ps1
-    }
+function _update_ps1()
+{
+    export PROMPT="$(~/powerline-zsh.py -m konsole $?)"
+}
+precmd()
+{
+    _update_ps1
+}
 ```
 
