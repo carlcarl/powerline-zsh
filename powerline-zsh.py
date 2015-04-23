@@ -318,7 +318,7 @@ if __name__ == '__main__':
     )
     args = arg_parser.parse_args()
 
-    p = Powerline(mode='default')
+    p = Powerline(mode=args.m)
     cwd = get_valid_cwd()
     add_virtual_env_segment(p, cwd)
     add_cwd_segment(p, cwd, 5, args.cwd_only)
