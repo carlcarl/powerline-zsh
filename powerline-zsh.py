@@ -53,6 +53,10 @@ class Powerline:
             'separator': '\u2B80',
             'separator_thin': '\u2B81'
         },
+        'konsole': {
+            'separator': '\ue0b0',
+            'separator_thin': '\ue0b1'
+        },
         'default': {
             'separator': '⮀',
             'separator_thin': '⮁'
