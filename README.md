@@ -22,9 +22,9 @@ A [Powerline](https://github.com/Lokaltog/vim-powerline) like prompt for Zsh:
 * This script uses ANSI color codes to display colors in a terminal. These are notoriously non-portable, so may not work for you out of the box, but try setting your $TERM to xterm-256color, because that works for me.
 i.e. edit your `.zshrc` file to add:
 
-   ```shell
-   export TERM='xterm-256color'
-   ```
+    ```shell
+    export TERM='xterm-256color'
+    ```
 
 If you still face problems seeing colors then read this: https://gist.github.com/3749830#file_powerline_zsh_instructions.md
 
@@ -35,31 +35,31 @@ Follow the instructions: https://github.com/Lokaltog/vim-powerline/tree/develop/
 
 * Clone this repository somewhere:
 
-   ```shell
-   git clone https://github.com/carlcarl/powerline-zsh
-   ```
+    ```shell
+    git clone https://github.com/carlcarl/powerline-zsh
+    ```
 
 * Create a symlink to the python script in your home:
    
-   ```shell
-   ln -s <path/to/powerline-zsh.py> ~/powerline-zsh.py
-   ```
+    ```shell
+    ln -s <path/to/powerline-zsh.py> ~/powerline-zsh.py
+    ```
 
 If you don't want the symlink, just modify the path in the `.zshrc` command below
 
 * Now add the following to your `.zshrc`:
 
-   ```shell
-   function _update_ps1()
-   {
-      export PROMPT="$(~/powerline-zsh.py $?)"
-   }
+    ```shell
+    function _update_ps1()
+    {
+        export PROMPT="$(~/powerline-zsh.py $?)"
+    }
 
-   precmd()
-   {
-      _update_ps1
-   }
-   ```
+    precmd()
+    {
+        _update_ps1
+    }
+    ```
 
 # Python version note
 
@@ -68,17 +68,17 @@ Most of the distros use `Python2` as default, however, Some distros like `Archli
 1. Use the newest version of `powerline-zsh`. Just download from the `master` branch.
 2. Modify the `.zshrc` content, use `python2` to execute it.
 
-   ```shell
-   function _update_ps1()
-   {
-      export PROMPT="$(python2 ~/powerline-zsh.py $?)"
-   }
+    ```shell
+    function _update_ps1()
+    {
+        export PROMPT="$(python2 ~/powerline-zsh.py $?)"
+    }
 
-   precmd()
-   {
-      _update_ps1
-   }
-   ```
+    precmd()
+    {
+        _update_ps1
+    }
+    ```
 
 
 # Pypy note
@@ -86,35 +86,35 @@ Most of the distros use `Python2` as default, however, Some distros like `Archli
 You can use `pypy` to speed up your script execution, in your `.zshrc`:
 
 
-	```shell
-	function _update_ps1()
-	{
-		error=$?
-		if [[ -s "/usr/local/bin/pypy" ]]; then
-			export PROMPT="$(pypy ~/powerline-zsh.py $error)"
-		else
-			export PROMPT="$(~/powerline-zsh.py $error)"
-		fi
-	}
+    ```shell
+    function _update_ps1()
+    {
+        error=$?
+        if [[ -s "/usr/local/bin/pypy" ]]; then
+            export PROMPT="$(pypy ~/powerline-zsh.py $error)"
+        else
+            export PROMPT="$(~/powerline-zsh.py $error)"
+        fi
+    }
 
-	precmd()
-	{
-		_update_ps1
-	}
+    precmd()
+    {
+        _update_ps1
+    }
 
 
 # konsole user note
 
 You may not see the icons when using konsole. To solve this problem, you can use `-m` option:
 
-   ```shell
-   function _update_ps1()
-   {
-      export PROMPT="$(~/powerline-zsh.py -m konsole $?)"
-   }
+    ```shell
+    function _update_ps1()
+    {
+        export PROMPT="$(~/powerline-zsh.py -m konsole $?)"
+    }
 
-   precmd()
-   {
-      _update_ps1
-   }
+    precmd()
+    {
+        _update_ps1
+    }
 
