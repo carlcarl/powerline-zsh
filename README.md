@@ -101,6 +101,7 @@ You can use `pypy` to speed up your script execution, in your `.zshrc`:
     {
         _update_ps1
     }
+	```
 
 
 # konsole user note
@@ -117,4 +118,5 @@ You may not see the icons when using konsole. To solve this problem, you can use
     {
         _update_ps1
     }
+	```
 
