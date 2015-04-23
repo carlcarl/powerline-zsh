@@ -54,6 +54,7 @@ If you don't want the symlink, just modify the path in the `.zshrc` command belo
    {
       export PROMPT="$(~/powerline-zsh.py $?)"
    }
+
    precmd()
    {
       _update_ps1
@@ -72,8 +73,48 @@ Most of the distros use `Python2` as default, however, Some distros like `Archli
    {
       export PROMPT="$(python2 ~/powerline-zsh.py $?)"
    }
+
    precmd()
    {
       _update_ps1
    }
    ```
+
+
+# Pypy note
+
+You can use `pypy` to speed up your script execution, in your `.zshrc`:
+
+
+	```shell
+	function _update_ps1()
+	{
+		error=$?
+		if [[ -s "/usr/local/bin/pypy" ]]; then
+			export PROMPT="$(pypy ~/powerline-zsh.py $error)"
+		else
+			export PROMPT="$(~/powerline-zsh.py $error)"
+		fi
+	}
+
+	precmd()
+	{
+		_update_ps1
+	}
+
+
+# konsole user note
+
+You may not see the icons when using konsole. To solve this problem, you can use `-m` option:
+
+   ```shell
+   function _update_ps1()
+   {
+      export PROMPT="$(~/powerline-zsh.py -m konsole $?)"
+   }
+
+   precmd()
+   {
+      _update_ps1
+   }
+
