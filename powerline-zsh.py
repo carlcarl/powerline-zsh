@@ -115,7 +115,6 @@ class Segment:
 
 
 def add_cwd_segment(powerline, cwd, maxdepth, cwd_only=False):
-    #powerline.append(' \\w ', 15, 237)
     home = os.getenv('HOME')
     cwd = os.getenv('PWD')
 
@@ -194,7 +193,6 @@ def get_git_status():
 
 
 def add_git_segment(powerline, cwd):
-    #cmd = "git branch 2> /dev/null | grep -e '\\*'"
     p = subprocess.Popen(['git', 'symbolic-ref', '-q', 'HEAD'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     out, err = p.communicate()
 
@@ -240,9 +238,8 @@ def add_svn_segment(powerline, cwd):
         '!' item is missing (removed by non-svn command) or incomplete
          '~' versioned item obstructed by some item of a different kind
     '''
-    #TODO: Color segment based on above status codes
+    # TODO: Color segment based on above status codes
     try:
-        #cmd = '"svn status | grep -c "^[ACDIMRX\\!\\~]"'
         p1 = subprocess.Popen(['svn', 'status'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         p2 = subprocess.Popen(['grep', '-c', '^[ACDIMRX\\!\\~]'], stdin=p1.stdout, stdout=subprocess.PIPE)
         output = p2.communicate()[0].strip()
@@ -309,13 +306,21 @@ if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument('--cwd-only', action="store_true")
     arg_parser.add_argument('prev_error', nargs='?', default=0)
+    arg_parser.add_argument(
+        '-m',
+        default='default',
+        help=(
+            'Choose icon font: default, compatible, patched or konsole.'
+            ' Default is "default"'
+        ),
+        choices=['defualt', 'compatible', 'patched', 'konsole'],
+        metavar='<mode>'
+    )
     args = arg_parser.parse_args()
 
     p = Powerline(mode='default')
     cwd = get_valid_cwd()
     add_virtual_env_segment(p, cwd)
-    #p.append(Segment(' \\u ', 250, 240))
-    #p.append(Segment(' \\h ', 250, 238))
     add_cwd_segment(p, cwd, 5, args.cwd_only)
     add_repo_segment(p, cwd)
     add_root_indicator(p, args.prev_error)
