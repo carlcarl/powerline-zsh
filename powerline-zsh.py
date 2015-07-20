@@ -202,7 +202,7 @@ def add_git_segment(powerline, cwd):
     if out:
         branch = out[len('refs/heads/'):].rstrip()
     else:
-        branch = '(Detached)'
+        branch = b'(Detached)'
 
     branch = branch.decode(encoding)
     has_pending_commits, has_untracked_files, origin_position = get_git_status()
