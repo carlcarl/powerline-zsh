@@ -114,7 +114,7 @@ class Segment:
             self.separator))
 
 
-def add_cwd_segment(powerline, cwd, maxdepth, cwd_only=False):
+def add_cwd_segment(powerline, cwd, maxdepth, cwd_only=False, hostname=False):
     home = os.getenv('HOME')
     cwd = os.getenv('PWD')
 
@@ -127,6 +127,9 @@ def add_cwd_segment(powerline, cwd, maxdepth, cwd_only=False):
     names = cwd.split('/')
     if len(names) > maxdepth:
         names = names[:2] + ['⋯ '] + names[2 - maxdepth:]
+
+    if hostname:
+        powerline.append(Segment(powerline, ' %m ' , Color.CWD_FG, Color.PATH_BG, powerline.separator_thin, Color.SEPARATOR_FG))
 
     if not cwd_only:
         for n in names[:-1]:
@@ -304,7 +307,20 @@ def get_valid_cwd():
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument('--cwd-only', action="store_true")
+    arg_parser.add_argument(
+        '--cwd-only',
+        action="store_true",
+        help=(
+            'Hide parent directory'
+        ),
+    )
+    arg_parser.add_argument(
+        '--hostname',
+        action="store_true",
+        help=(
+            'Show hostname at the begin'
+        ),
+    )
     arg_parser.add_argument('prev_error', nargs='?', default=0)
     arg_parser.add_argument(
         '-m',
@@ -321,7 +337,7 @@ if __name__ == '__main__':
     p = Powerline(mode=args.m)
     cwd = get_valid_cwd()
     add_virtual_env_segment(p, cwd)
-    add_cwd_segment(p, cwd, 5, args.cwd_only)
+    add_cwd_segment(p, cwd, 5, args.cwd_only, args.hostname)
     add_repo_segment(p, cwd)
     add_root_indicator(p, args.prev_error)
     if sys.version_info[0] < 3:

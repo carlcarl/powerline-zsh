@@ -60,6 +60,15 @@ precmd()
 }
 ```
 
+* powerline-zsh.py usage:
+
+	optional arguments:
+	-h, --help  show this help message and exit
+	--cwd-only  Hide parent directory
+	--hostname  Show hostname at the begin
+	-m <mode>   Choose icon font: default, compatible, patched or konsole.
+				Default is "default"
+
 # Python version note
 
 Most of the distros use `Python2` as default, however, Some distros like `Archlinux` use `Python3`. The earlier version of `powerline-zsh` is not compatible with `Python3`. With such condition, you have two ways to solve this issue.
