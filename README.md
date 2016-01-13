@@ -62,12 +62,13 @@ precmd()
 
 * powerline-zsh.py usage:
 
-	optional arguments:
-	-h, --help  show this help message and exit
-	--cwd-only  Hide parent directory
-	--hostname  Show hostname at the begin
-	-m <mode>   Choose icon font: default, compatible, patched or konsole.
-				Default is "default"
+```shell
+-h, --help  show this help message and exit
+--cwd-only  Hide parent directory
+--hostname  Show hostname at the begin
+-m <mode>   Choose icon font: default, compatible, patched or konsole.
+            Default is "default"
+```
 
 # Python version note
 
