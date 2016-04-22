@@ -329,7 +329,7 @@ if __name__ == '__main__':
             'Choose icon font: default, compatible, patched or konsole.'
             ' Default is "default"'
         ),
-        choices=['defualt', 'compatible', 'patched', 'konsole'],
+        choices=['default', 'compatible', 'patched', 'konsole'],
         metavar='<mode>'
     )
     args = arg_parser.parse_args()
