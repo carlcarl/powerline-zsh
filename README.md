@@ -127,3 +127,8 @@ precmd()
 }
 ```
 
+# Authors and License
+The ``powerline-zsh`` package is written by Chien-Wei Huang, Shrey Banga and contributors. It’s MIT licensed and freely available.
+
+Feel free to improve this package and send a pull request to GitHub.
+
