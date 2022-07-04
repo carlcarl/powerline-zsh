@@ -45,6 +45,10 @@ class Color:
 
 class Powerline:
     symbols = {
+        'none': {
+            'separator': '',
+            'separator_thin': ''
+        },
         'compatible': {
             'separator': '\u25B6',
             'separator_thin': '\u276F'
@@ -326,10 +330,10 @@ if __name__ == '__main__':
         '-m',
         default='default',
         help=(
-            'Choose icon font: default, compatible, patched or konsole.'
+            'Choose icon font: default, none, compatible, patched or konsole.'
             ' Default is "default"'
         ),
-        choices=['default', 'compatible', 'patched', 'konsole'],
+        choices=['default', 'none', 'compatible', 'patched', 'konsole'],
         metavar='<mode>'
     )
     args = arg_parser.parse_args()
